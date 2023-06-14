@@ -77,12 +77,17 @@ WSGI_APPLICATION = 'proyecto.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE':'django.db.backends.sqlite3', 
+        'ENGINE':'sql_server.pyodbc', 
         'NAME': 'djanGoDatabase',
         'USER': 'sa',
         'PASSWORD': '12345678',
-        'HOST': 'DESKTOP-VT1VDEA',
-        'PORT': ''
+        #'HOST': 'DESKTOP-VT1VDEA',
+        'HOST':'LAPTOP-LLTJM9PS\SQLEXPRESS',
+        'PORT': '',
+        'OPTIONS': {
+            'driver': 'ODBC Driver 17 for SQL Server',
+        }
+
     }
 }
 
