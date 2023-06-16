@@ -1,6 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
-<body>
-    
-</body>
+  <head>
+    <style>
+      .titulo{
+        background-color: #286150;
+        border-radius: 20px;
+        padding: 10px;
+        font-family: arial;
+      }
+      h1{
+        color:white;
+        font-size: xxx-large;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- encabezado -->
+    <div class="titulo" align="center">
+      <h1>Libros</h1>
+    </div>
+    <!-- contenido -->
+    <div>
+        {% for libro in libros %}
+        <p>{{libro.titulo}}</p>
+        {%endfor%}
+    </div>
+    <div>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Guardar</button>
+        </form>
+    </div>
+  </body>
 </html>

@@ -77,15 +77,15 @@ WSGI_APPLICATION = 'proyecto.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE':'sql_server.pyodbc', 
+        'ENGINE':'mssql', 
         'NAME': 'djanGoDatabase',
         'USER': 'sa',
         'PASSWORD': '12345678',
-        #'HOST': 'DESKTOP-VT1VDEA',
-        'HOST':'LAPTOP-LLTJM9PS\SQLEXPRESS',
+        'HOST': 'localhost\SQLEXPRESS',
+        #'HOST':'LAPTOP-LLTJM9PS\SQLEXPRESS',
         'PORT': '',
         'OPTIONS': {
-            'driver': 'ODBC Driver 17 for SQL Server',
+            'driver': 'ODBC Driver 17 for SQL Server'
         }
 
     }
