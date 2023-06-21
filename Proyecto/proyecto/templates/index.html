@@ -1,5 +1,9 @@
+{% load bootstrap4 %}
+{% load widget_tweaks %}
 <!DOCTYPE html>
   <head>
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
     <style>
       .titulo{
         background-color: #286150;
@@ -19,7 +23,62 @@
       <h1>Libros</h1>
     </div>
     <!-- contenido -->
-    <div>
+    {% block content %}
+    <div align="center">
+      <div style="width:70%">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">
+                #
+              </th>
+              <th scope="col">
+                Titulo
+              </th>
+              <th scope="col">
+                Edicion
+              </th>
+              <th scope="col">
+                Editorial
+              </th>
+              <th scope="col">
+                Año de publicacion
+              </th>
+              <th scope="col">
+                No. Paginas
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for libro in libros %}
+            <tr>
+              
+                <td scope="row">{{ libro.id}}</td>
+                <td scope="row">{{ libro.titulo }}</td>
+                <td scope="row">{{ libro.edicion }}</td>
+                <td scope="row">{{ libro.editorial }}</td>
+                <td scope="row">{{ libro.anio_de_publicacion }}</td>
+                <td scope="row">{{ libro.paginas }}</td>
+              
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      <!-- formulario -->
+      <br>
+      <br>
+      <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="{{ form.titulo.id_for_label }}">Título</label>
+          {{ form.titulo|add_class:"form-control" }}
+        </div>
+      </form>
+      </div>
+    </div>
+    {% endblock %}
+
+    {% comment %} <div>
         {% for libro in libros %}
         <p>{{libro.titulo}}</p>
         {%endfor%}
@@ -30,6 +89,6 @@
             {{ form.as_p }}
             <button type="submit">Guardar</button>
         </form>
-    </div>
+    </div> {% endcomment %}
   </body>
 </html>
