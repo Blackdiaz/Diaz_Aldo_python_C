@@ -1,0 +1,95 @@
+{% load bootstrap4 %}
+{% load widget_tweaks %}
+<!DOCTYPE html>
+  <head>
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    <style>
+      .titulo{
+        background-color: #286150;
+        border-radius: 20px;
+        padding: 10px;
+        font-family: arial;
+      }
+      h1{
+        color:white;
+        font-size: xxx-large;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- encabezado -->
+    <div class="titulo" align="center">
+      <h1>Libros</h1>
+    </div>
+    <!-- contenido -->
+    {% block content %}
+    <div align="center">
+      <div style="width:70%">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">
+                #
+              </th>
+              <th scope="col">
+                Nombre
+              </th>
+              <th scope="col">
+                Descripcion
+              </th>
+              <th scope="col">
+                Precio
+              </th>
+              <th scope="col">
+                Fecha de registro
+              </th>
+              <th scope="col">
+                Estatus
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for producto in productos %}
+            <tr>
+              
+                <td scope="row">{{ producto.id}}</td>
+                <td scope="row">{{ producto.nombre }}</td>
+                <td scope="row">{{ producto.descripcion }}</td>
+                <td scope="row">{{ producto.precio }}</td>
+                <td scope="row">{{ producto.fecha_registro }}</td>
+                <td scope="row">{{ producto.estatus }}</td>
+                
+              
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      <!-- formulario -->
+      <br>
+      <br>
+      <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="{{ form.nombre.id_for_label }}">Nombre</label>
+          {{ form.titulo|add_class:"form-control" }}
+        </div>
+      </form>
+      </div>
+    </div>
+    {% endblock %}
+
+    {% comment %} <div>
+        {% for libro in libros %}
+        <p>{{libro.titulo}}</p>
+        {%endfor%}
+    </div>
+    <div>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Guardar</button>
+        </form>
+    </div> {% endcomment %}
+  </body>
+</html>
