@@ -70,10 +70,26 @@
       <form method="post">
         {% csrf_token %}
         <div class="form-group">
-          <label for="{{ form.titulo.id_for_label }}">Título</label>
-          {{ form.titulo|add_class:"form-control" }}
+          <label for="{{ form.titulo.id_for_label }}">Titulo</label>
+          {{ form.|add_class:"form-control" }}
         </div>
-      </form>
+        <div class="form-group">
+          <label for="{{ form.edicion.id_for_label }}">Edicion</label>
+          {{ form.edicion|add_class:"form-control" }}
+        </div>
+        <div class="form-group">
+          <label for="{{ form.editorial.id_for_label }}">Editorial</label>
+          {{ form.editorial|add_class:"form-control" }}
+        </div>
+        <div class="form-group">
+          <label for="{{ form.anio_de_publicacion.id_for_label }}">Año de publicacion</label>
+          {{ form.anio_de_publicacion|add_class:"form-control" }}
+        </div>
+        <div class="form-group">
+          <label for="{{ form.paginas.id_for_label }}">No. de paginas</label>
+          {{ form.paginas|add_class:"form-control" }}
+        </div>
+       </form>
       </div>
     </div>
     {% endblock %}

@@ -6,5 +6,5 @@ from . import views
 urlpatterns = [
     
     path('index', views.Index.as_view(), name = 'indexProductos'),
-    path('insertar',views.Index.insertar_libro, name='insertar')
+    path('insertar',views.Index.insertar_Producto, name='insertar')
 ]

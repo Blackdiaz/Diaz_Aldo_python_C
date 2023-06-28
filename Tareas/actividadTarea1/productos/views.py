@@ -13,7 +13,7 @@ class Index(View):
         form = ProductosForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('indexLibros')
+            return redirect('indexProductos')
         
         return render(request, self.template_name, {'form': form})
     
@@ -22,14 +22,14 @@ class Index(View):
         form = ProductosForm()
         return render(request, self.template_name, {'form': form,'productos':productos})
     
-    def insertar_libro(request):
-        nuevo_libro = Productos(
+    def insertar_Producto(request):
+        nuevo_Producto = Productos(
             nombre="El gran libro",
             descripcion="Primera edición",
             precio =10.00,
             fecha_registro="2022/02/23",
             status=2022,
         )
-        nuevo_libro.save()
+        nuevo_Producto.save()
     
         return HttpResponse("Libro insertado correctamente")

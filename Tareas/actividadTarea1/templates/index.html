@@ -71,10 +71,31 @@
       <form method="post">
         {% csrf_token %}
         <div class="form-group">
-          <label for="{{ form.nombre.id_for_label }}">Nombre</label>
-          {{ form.titulo|add_class:"form-control" }}
+          <label for="{{ form.titulo.id_for_label }}">Nombre</label>
+          {{ form.nombre|add_class:"form-control" }}
         </div>
-      </form>
+        <div class="form-group">
+          <label for="{{ form.edicion.id_for_label }}">Descripcion</label>
+          {{ form.descripcion|add_class:"form-control" }}
+        </div>
+        <div class="form-group">
+          <label for="{{ form.editorial.id_for_label }}">Precio</label>
+          {{ form.precio|add_class:"form-control" }}
+        </div>
+        <div class="form-group">
+          <label for="{{ form.anio_de_publicacion.id_for_label }}">Fecha registro</label>
+          {{ form.fecha_registro|add_class:"form-control" }}
+        </div>
+        <div class="form-group">
+          <label for="{{ form.paginas.id_for_label }}">Estatus</label>
+          {{ form.estatus|add_class:"form-control" }}
+        </div>
+        <button class="button is-success is-fullwidth is-medium mt-5"
+
+                type="submit">Dweet
+
+        </button>
+       </form>
       </div>
     </div>
     {% endblock %}
