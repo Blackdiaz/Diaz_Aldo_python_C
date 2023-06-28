@@ -56,7 +56,7 @@
                 <td scope="row">{{ producto.id}}</td>
                 <td scope="row">{{ producto.nombre }}</td>
                 <td scope="row">{{ producto.descripcion }}</td>
-                <td scope="row">{{ producto.precio }}</td>
+                <td scope="row">${{ producto.precio }}</td>
                 <td scope="row">{{ producto.fecha_registro }}</td>
                 <td scope="row">{{ producto.estatus }}</td>
                 
@@ -71,23 +71,23 @@
       <form method="post">
         {% csrf_token %}
         <div class="form-group">
-          <label for="{{ form.titulo.id_for_label }}">Nombre</label>
+          <label for="{{ form.nombre.id_for_label }}">Nombre</label>
           {{ form.nombre|add_class:"form-control" }}
         </div>
         <div class="form-group">
-          <label for="{{ form.edicion.id_for_label }}">Descripcion</label>
+          <label for="{{ form.descripcion.id_for_label }}">Descripcion</label>
           {{ form.descripcion|add_class:"form-control" }}
         </div>
         <div class="form-group">
-          <label for="{{ form.editorial.id_for_label }}">Precio</label>
+          <label for="{{ form.precio.id_for_label }}">Precio</label>
           {{ form.precio|add_class:"form-control" }}
         </div>
         <div class="form-group">
-          <label for="{{ form.anio_de_publicacion.id_for_label }}">Fecha registro</label>
+          <label for="{{ form.fecha_registro.id_for_label }}">Fecha registro</label>
           {{ form.fecha_registro|add_class:"form-control" }}
         </div>
         <div class="form-group">
-          <label for="{{ form.paginas.id_for_label }}">Estatus</label>
+          <label for="{{ form.estatus.id_for_label }}">Estatus</label>
           {{ form.estatus|add_class:"form-control" }}
         </div>
         <button class="button is-success is-fullwidth is-medium mt-5"
