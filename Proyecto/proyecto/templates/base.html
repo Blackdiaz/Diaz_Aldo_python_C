@@ -1,0 +1,38 @@
+{% load bootstrap4 %}
+{% load widget_tweaks %}
+<!DOCTYPE html>
+  <head>
+    {% bootstrap_css %}
+    
+    
+  </head>
+  <body>  
+    <header>
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Libros</a>
+        <button class="navbar-toggler" type="button" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+        aria-label="Toogle navigation" >
+        <span class="navbar-toggler-icon"></span>
+
+        <div class="collapse navbar-collaps" id="navbarNav">
+            <ul>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'inicio' %}">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'formulario' %}">Formulario</a>
+                </li>
+            </ul>
+        </div>
+
+        </button>
+             
+        <nav>
+    </header>
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+    {% bootstrap_javascript %}
+  </body>
+</html>

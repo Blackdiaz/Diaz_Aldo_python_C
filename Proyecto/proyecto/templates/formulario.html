@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% load widget_tweaks %}
+
+<!DOCTYPE html>
+  <head>
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    <style>
+      .titulo{
+        background-color: #286150;
+        border-radius: 20px;
+        padding: 10px;
+        font-family: arial;
+      }
+      h1{
+        color:white;
+        font-size: xxx-large;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- encabezado -->
+    <div class="titulo" align="center">
+      <h1>Libros</h1>
+    </div>
+    <!-- contenido -->
+    
+    <div align="center">
+      <div style="width:70%">
+        
+      <!-- formulario -->
+      <br>
+      <br>
+      <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="{{ form.titulo.id_for_label }}">Titulo</label>
+          {{ form.titulo|add_class:"form-control" }}
+        </div>
+        <div class="form-group">
+          <label for="{{ form.edicion.id_for_label }}">Edicion</label>
+          {{ form.edicion|add_class:"form-control" }}
+        </div>
+        <div class="form-group">
+          <label for="{{ form.editorial.id_for_label }}">Editorial</label>
+          {{ form.editorial|add_class:"form-control" }}
+        </div>
+        <div class="form-group">
+          <label for="{{ form.anio_de_publicacion.id_for_label }}">Año de publicacion</label>
+          {{ form.anio_de_publicacion|add_class:"form-control" }}
+        </div>
+        <div class="form-group">
+          <label for="{{ form.paginas.id_for_label }}">No. de paginas</label>
+          {{ form.paginas|add_class:"form-control" }}
+        </div>
+       </form>
+      </div>
+    </div>
+    
+
+    {% comment %} <div>
+        {% for libro in libros %}
+        <p>{{libro.titulo}}</p>
+        {%endfor%}
+    </div>
+    <div>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Guardar</button>
+        </form>
+    </div> {% endcomment %}
+  </body>
+</html>

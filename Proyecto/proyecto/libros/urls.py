@@ -5,6 +5,7 @@ from . import views
 
 urlpatterns = [
     
-    path('index', views.Index.as_view(), name = 'indexLibros'),
-    path('insertar',views.Index.insertar_libro, name='insertar')
+    path('index', views.Inicio.as_view(), name = 'indexLibros'),
+    #path('insertar',views.Inicio.insertar_libro, name='insertar'),
+    path('formulario',views.Formulario.as_view(), name='formulario')
 ]
