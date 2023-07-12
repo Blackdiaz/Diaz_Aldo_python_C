@@ -61,7 +61,22 @@
                 <td scope="row">{{ libro.editorial }}</td>
                 <td scope="row">{{ libro.anio_de_publicacion }}</td>
                 <td scope="row">{{ libro.paginas }}</td>
-              
+                <td>
+                  <form method='post' id='form-eliminar' action='{% url 'eliminar_libro' libro.pk %}'>
+                    <input type='hidden' name='libro-id' value'{{ libro.pk}}'>
+                    <button type='button' class='btn btn-danger' id='btn-confirmar-eliminar'>Eliminar</button>
+                    <div class='dropdown' id='dropdown-confirmscion' style='display:none;'>
+                      <button class='btn btn-primary dropdown-toggle' type='button' id='dropdownMenuButtton' data-toggle='dropdown' aria-expanded='false'>
+                        Confirmar eliminacion
+                      </button>
+                      <div class='dropdown-menu' aria-labelledby='dropdownMenuButton'>
+                        <button class='dropdown-item' type='submit'>  Si, eliminar  </button>
+                        <button class='dropdown-item' type='button'>  Cancelar  </button>
+                      </div>
+                    </div>
+
+                  </form>
+                </td>
             </tr>
             {% endfor %}
           </tbody>
@@ -74,3 +89,4 @@
 
   </body>
 </html>
+{% endblock %}

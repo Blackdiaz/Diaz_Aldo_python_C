@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejemplo JQ</title>
+    <style>
+        .modal{
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 9999;
+        }
+        .model-content{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            background-color: white;
+            border-radius: 20px;
+            padding: 20px;
+        }
+    </style>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    
+   <button id="abrirModal" > Abrir Modal</button>
+
+   <div id="modal" class="modal">
+
+        <div class="model-content">
+            <p>Hola mundis</p>
+        </div>
+    
+   </div>
+<script>
+    $(document).ready(function(){
+        $('#abrirModal').click(function(){
+            $('#modal').show();
+        })
+    })
+    function openModal()
+    {
+        var modal = document.getElementById('modal');
+        modal.style.display = 'block';
+        
+    }
+</script>
+</body>
+</html>
