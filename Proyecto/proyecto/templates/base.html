@@ -14,10 +14,10 @@
         aria-label="Toogle navigation" >
         <span class="navbar-toggler-icon"></span>
 
-        <div class="collapse navbar-collaps" id="navbarNav">
+        <div class="collapse navbar-collapse" id="navbarNav">
             <ul>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'Inicio' %}">Inicio</a>
+                    <a class="nav-link" href="{% url 'index' %}">Inicio</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'formulario' %}">Formulario</a>
@@ -27,11 +27,11 @@
 
         </button>
              
-        <nav>
+      </nav>
     </header>
     <main>
-        {% block content %}
-        {% endblock %}
+      {% block content %}
+      {% endblock content %}
     </main>
     {% bootstrap_javascript %}
   </body>
