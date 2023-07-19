@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load bootstrap4 %}
 {% load widget_tweaks %}
-
+{% block content %}
 <!DOCTYPE html>
   <head>
     {% bootstrap_css %}
@@ -54,6 +54,7 @@
           <label for="{{ form.paginas.id_for_label }}">No. de paginas</label>
           {{ form.paginas|add_class:"form-control" }}
         </div>
+        <button type="submit">Guardar</button>
        </form>
       </div>
     </div>
@@ -73,3 +74,4 @@
     </div> {% endcomment %}
   </body>
 </html>
+{% endblock %}
