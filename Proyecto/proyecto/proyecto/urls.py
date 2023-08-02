@@ -22,6 +22,7 @@ from django.contrib.auth import views as auth_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('libros/', include("libros.urls")),
-    path('login/',auth_views.LoginView.as_view ,name='login'),
-    path('logout/', views.custom_logout ,name='logout')
+    path('login/',views.custom_login ,name='login'),
+    path('logout/', views.custom_logout ,name='logout'),
+    path('estadisticas/',views.estadisticas_libros,name='estadisticas_libros')
 ]

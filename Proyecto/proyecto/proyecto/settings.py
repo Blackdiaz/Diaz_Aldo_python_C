@@ -137,3 +137,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTHETICATION_BACKENDS = ['django.contrib.auth.backends.ModeBackend']
 LOGIN_REDIRECT_URL = '/libros/inicio'
+LOGIN_URL = '/login/'
