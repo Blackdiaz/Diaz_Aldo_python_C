@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estadisticas libros</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-8 offset-2">
+                <h1>Estadisticas de libros</h1>
+                <div class="text-center mb-3">
+                    <p>Total del paginas de todos los libros: {{ total_paginas}}</p>
+                    <p>Año maximo de publicacion: {{ max_anio_publicacion}}</p>
+                    <p>Promedio de paginas de los libros: {{ promedio_paginas}}</p>
+                    <div style="height: 400px;">
+                        <canvas id="grafico"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var datos = 
+        {
+            labels:["Total de paginas","Año maximo de publicacion","Numero promedio de paginas"],
+            datasets:[{
+                label:"Estadisticas de libros",
+                backgroundColor:["yellow","blue","green"],
+                data:[{{total_paginas}},{{max_anio_publicacion}},{{promedio_paginas}}]
+            }]
+        };
+
+        var opciones =
+        {
+            responsive:true,
+            maitainAspectRatio:false
+        };
+
+        var ctx = document.getElementById("grafico").getContext("2d");
+        var grafico = new Chart(ctx, { 
+            type: 'bar',
+            data: datos,
+            options: opciones
+        })
+
+    </script>
+</body>
+</html>

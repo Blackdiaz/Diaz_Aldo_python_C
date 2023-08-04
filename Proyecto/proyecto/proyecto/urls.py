@@ -24,5 +24,5 @@ urlpatterns = [
     path('libros/', include("libros.urls")),
     path('login/',views.custom_login ,name='login'),
     path('logout/', views.custom_logout ,name='logout'),
-    path('estadisticas/',views.estadisticas_libros,name='estadisticas_libros')
+    
 ]

@@ -58,7 +58,7 @@ def estadisticas_libros(request):
     #Obtener el numero promedio de paginas de todos los libros
     promedio_paginas = Libros.objects.aggregate(promedio_paginas=Avg('paginas'))['promedio_paginas']
 
-    return render(request,'estadisticas_libros.html',{
+    return render(request,'estadisticas/estadisticas_libros.html',{
         'total_paginas':total_paginas,
         'max_anio_publicacion': max_anio_publicacion,
         'promedio_paginas':promedio_paginas
