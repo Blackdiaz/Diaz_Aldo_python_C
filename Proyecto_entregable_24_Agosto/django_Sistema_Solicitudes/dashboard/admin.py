@@ -1,3 +1,7 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import archivos,direcciones,Tickets
+
+admin.site.register(archivos)
+admin.site.register(direcciones)
+admin.site.register(Tickets)

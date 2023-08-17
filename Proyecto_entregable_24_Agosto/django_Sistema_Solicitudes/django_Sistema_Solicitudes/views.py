@@ -7,7 +7,7 @@ from django.contrib.auth import logout
 
 def custom_logout(request):
     logout(request)
-    return redirect('/libros/inicio')
+    return redirect('/dashboard/dashboardPublico')
 
 def custom_login(request):
     template_name = 'login.html'
@@ -22,7 +22,7 @@ def custom_login(request):
         else:
             print('----> No, entro')
             messages.error(request, 'Credenciales invalidas')
-            return redirect('/dashboard/publico')
+            return redirect('/dashboard/dashboardPublico')
 
     return render(request,template_name)
 
