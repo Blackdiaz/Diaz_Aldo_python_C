@@ -2,16 +2,16 @@ from django.db import models
 
 # Create your models here.
 class Tickets(models.Model):
-    folioTicket = models.CharField("Folio Ticket",max_length=100,default="") 
+    folioTicket = models.CharField("Folio Ticket",max_length=50,default="") 
     resumen = models.CharField("Resumen",max_length=500,default="")
-    archivosAdjuntos = models.CharField("Archivos",max_length=2,default=0)
+    archivosAdjuntos = models.CharField("Archivos",max_length=2,default="")
     direccion = models.CharField("Direccion",max_length=300,default="")
-    fechaCreacion = models.DateField("Fecha de creacion",default="")
-    fechaActualizacion = models.DateField("Fecha de modificacion",default="")
+    fechaCreacion = models.DateTimeField("Fecha de creacion" ,null=True,default=None)
+    fechaActualizacion = models.DateTimeField("Fecha de modificacion" ,null=True,default=None)
     usuarioEncargado = models.CharField("Usuario encargado",max_length=50,default="")
-    fechaAtencion = models.DateField("Fecha de atencion",default="")
-    fechaTerminacionPrevista = models.DateField("Fecha de finalizacion programada",default="")
-    fechaTerminacionFinal = models.DateField("Fecha de finalizacion real",default="")
+    fechaAtencion = models.DateTimeField("Fecha de atencion" ,null=True,default=None)
+    fechaTerminacionPrevista = models.DateTimeField("Fecha de finalizacion programada" ,null=True,default=None)
+    fechaTerminacionFinal = models.DateTimeField("Fecha de finalizacion real" ,null=True,default=None)
     statusTicket = models.CharField("Status ticket",max_length=2,default="")
     nivelPrioridad = models.CharField("Nivel de prioridad",max_length=2,default="")
     comentariosEncargado = models.CharField("Comentarios",max_length=500,default="")
@@ -23,7 +23,7 @@ class archivos(models.Model):
     folioTicket =  models.CharField("Folio Ticket",max_length=100,default="")
     descricpcionArchivo = models.CharField("Descricpcion Archivo",max_length=500,default="")
     archivos = models.FileField("Archivo",default="")
-    fechaArchivo = models.DateField("Fecha de creacion",default="")                  
+    fechaArchivo = models.DateTimeField("Fecha de creacion",null=True,default=None)                  
     def _str_(self):
         return self.folioTicket
 
@@ -34,4 +34,4 @@ class direcciones(models.Model):
     estado = models.CharField("Colonia",max_length=50,default="") 
     cp = models.CharField("Colonia",max_length=8,default="") 
     def _str_(self):
-        return self.folioTicket
+        return self.cp

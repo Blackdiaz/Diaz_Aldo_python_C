@@ -21,7 +21,7 @@ class TicketsForms (forms.ModelForm):
         nivelPrioridad = cleaned_data.get('nivelPrioridad')
         comentariosEncargado = cleaned_data.get('comentariosEncargado')
 
-        if not resumen or not fechaCreacion or not direccion:
+        if not resumen or not direccion:
             raise forms.ValidationError('Todos los campos deben llenarse')
         
         return cleaned_data

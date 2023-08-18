@@ -18,7 +18,9 @@ class Formulario(View):
         form = TicketsForms(request.POST)
         if form.is_valid():
             form.save()
-        return redirect('index')
+            return redirect('index')
+        else:
+            print(form.errors)
         
             
         return render(request, self.teamplate_name, {'form': form})
