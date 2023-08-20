@@ -65,27 +65,28 @@ class Servidor(View):
 
 class ListaTickets(View):
     teamplate_name = 'listaTickets.html'
-    
-    def update_ticket(self,request):
-        
-        if request.method == "POST":
-            
-            ticket = Tickets.objects.get(id=request.POST.get('id'))
-            print(ticket)
-            ticketform = TicketsForms(request.POST,instance=ticket)
-            if ticketform.is_valid():
-                ticketform.save()
-                tickets = Tickets.objects.all()
-
-        return render(request, self.teamplate_name, {'tickets': tickets})
-
-    def ticket_view(request, id):
-        incident = get_object_or_404(id=id)
-        short_description = incident.short_description
-        return render(request, "detailTicket.html", locals())
 
     @method_decorator(login_required)
     def get(self, request):
         tickets = Tickets.objects.all()
         
         return render(request, self.teamplate_name, {'tickets': tickets})
+    
+class UpdateTicket(View):
+    teamplate_name = 'listaTickets.html'
+
+    @method_decorator(login_required)
+    def post(self,request):
+        
+        if request.method == "POST":
+            
+            ticket = get_object_or_404(Tickets,pk=request.POST.get('id'))
+            print(ticket.resumen)
+            ticket.resumen = request.POST.get('resumen')
+            ticket.save()
+            print(ticket.resumen)
+            tickets = Tickets.objects.all()
+            
+                
+
+        return render(request,self.teamplate_name, {'tickets': tickets})

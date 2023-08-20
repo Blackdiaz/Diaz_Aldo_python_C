@@ -72,7 +72,7 @@
               <div class="modal fade" id="detallesTicketModalCenter{{ticket.id}}" tabindex="-1" role="dialog"
                 aria-labelledby="detallesTicketModalCenterTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
-                  <form action="action='{% url 'updateTicket' %}'" method="post"></form>
+                  <form action="{% url 'updateTicket' %}" method="post">
                   <div class="modal-content">
                     <div class="modal-header">
                       <h5 class="modal-title" id="detallesTicketModalLongTitle">Detalles Ticket {{ ticket.id }}</h5>
@@ -86,54 +86,23 @@
                       <div class="container-fluid">
                         <div class="row">
                           <div class="col-md-12">
-                              <div class="form-group">
+                            <div class="form-group">
                                  
-                                <label for="exampleInputEmail1">
-                                  Resumen
-                                </label>
-                                <input type="email" class="form-control" id="resumen{{ticket.id}}" value="{{ticket.resumen}}" />
-                              </div>
+                              <label for="exampleInputEmail1">
+                                ID
+                              </label>
+                              <input type="number" class="form-control" id="resumen{{ticket.id}}" name="id" value="{{ticket.id}}" />
+                            </div>
 
                               <div class="form-group">
                                  
                                 <label for="exampleInputEmail1">
                                   Resumen
                                 </label>
-                                <input type="email" class="form-control" id="resumen{{ticket.id}}" value="{{ticket.resumen}}" />
-                              </div>
-                              
-                              <div class="form-group">
-                                 
-                                <label for="exampleInputEmail1">
-                                  Resumen
-                                </label>
-                                <input type="email" class="form-control" id="resumen{{ticket.id}}" value="{{ticket.resumen}}" />
+                                <input type="text" class="form-control" id="resumen{{ticket.resumen}}" name="resumen" value="{{ticket.resumen}}" />
                               </div>
 
-                              <div class="form-group">
-                                 
-                                <label for="exampleInputEmail1">
-                                  Resumen
-                                </label>
-                                <input type="email" class="form-control" id="resumen{{ticket.id}}" value="{{ticket.resumen}}" />
-                              </div>
-
-                              <div class="form-group">
-                                 
-                                <label for="exampleInputEmail1">
-                                  Resumen
-                                </label>
-                                <input type="email" class="form-control" id="resumen{{ticket.id}}" value="{{ticket.resumen}}" />
-                              </div>
-
-                              <div class="form-group">
-                                 
-                                <label for="exampleInputEmail1">
-                                  Resumen
-                                </label>
-                                <input type="email" class="form-control" id="resumen{{ticket.id}}" value="{{ticket.resumen}}" />
-                              </div>
-                              
+                            
                              
                             
                           </div>
@@ -143,7 +112,7 @@
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                      <button type="button" class="btn btn-primary">Save changes</button>
+                      <button type="submit" class="btn btn-primary">Save changes</button>
                     </div>
                   </div>
                   </form>
