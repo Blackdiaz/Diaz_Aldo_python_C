@@ -4,6 +4,7 @@ import datetime
 # Create your models here.
 class Tickets(models.Model):
     resumen = models.CharField("Resumen",max_length=500,default="")
+    descripcion = models.CharField("Resumen",max_length=1000,default="")
     direccion = models.CharField("Direccion",max_length=300,default="")
     fechaCreacion = models.DateTimeField("Fecha de creacion" ,null=True,default=datetime.datetime.now)
     fechaActualizacion = models.DateTimeField("Fecha de modificacion" ,null=True,default=None)

@@ -21,11 +21,8 @@ class TicketsForms (forms.ModelForm):
             raise forms.ValidationError('Todos los campos deben llenarse')
         
         return cleaned_data
-    def customSave(self):
-        data = self.save(commit=False)
-        data.save()
-        return data
-    
+
+
 
 
 class ArchivosForms (forms.ModelForm):

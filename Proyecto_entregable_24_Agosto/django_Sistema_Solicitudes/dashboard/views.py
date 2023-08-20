@@ -16,7 +16,6 @@ class Formulario(View):
     teamplate_name = 'formulario.html'
     
     def post(self,request):
-        print("Prubea request",request.POST)
         submitted = False
         if request.method == "POST":
             #resumen = request.POST.get('resumen')
@@ -27,7 +26,6 @@ class Formulario(View):
             ticketsForms = TicketsForms(request.POST)
             if ticketsForms.is_valid():
                 data = ticketsForms.save()
-                print("Objeto SQL",data)
                 updated_request.update({'idTicket': [data.id]})
             archivosForms = ArchivosForms(updated_request)
             if archivosForms.is_valid():
@@ -60,6 +58,7 @@ class Publico(View):
 class Servidor(View):
     teamplate_name = 'dashboardServidor.html'
     
+    
     @method_decorator(login_required)
     def get(self, request):
         return render(request, self.teamplate_name)
@@ -67,10 +66,24 @@ class Servidor(View):
 class ListaTickets(View):
     teamplate_name = 'listaTickets.html'
     
-    def post(self, request):
-          
-        return render(request, self.teamplate_name)
-    
+    def update_ticket(self,request):
+        
+        if request.method == "POST":
+            
+            ticket = Tickets.objects.get(id=request.POST.get('id'))
+            print(ticket)
+            ticketform = TicketsForms(request.POST,instance=ticket)
+            if ticketform.is_valid():
+                ticketform.save()
+                tickets = Tickets.objects.all()
+
+        return render(request, self.teamplate_name, {'tickets': tickets})
+
+    def ticket_view(request, id):
+        incident = get_object_or_404(id=id)
+        short_description = incident.short_description
+        return render(request, "detailTicket.html", locals())
+
     @method_decorator(login_required)
     def get(self, request):
         tickets = Tickets.objects.all()

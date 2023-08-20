@@ -1,108 +1,172 @@
-{% extends 'base.html' %}
 {% load bootstrap4 %}
 {% load widget_tweaks %}
 {% block content %}
 <!DOCTYPE html>
-  <head>
-    {% bootstrap_css %}
-    {% bootstrap_javascript %}
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <style>
-      .titulo{
-        background-color: #286150;
-        border-radius: 20px;
-        padding: 10px;
-        font-family: arial;
-      }
-      h1{
-        color:white;
-        font-size: xxx-large;
-      }
-    </style>
-  </head>
-  <body>
-    <!-- encabezado -->
-    <div class="titulo" align="center">
-      <h1>Libros</h1>
-    </div>
-    <!-- contenido -->
-    
-    <div align="center">
-      <div style="width:70%">
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">
-                #
-              </th>
-              <th scope="col">
-                Titulo
-              </th>
-              <th scope="col">
-                Edicion
-              </th>
-              <th scope="col">
-                Editorial
-              </th>
-              <th scope="col">
-                Año de publicacion
-              </th>
-              <th scope="col">
-                No. Paginas
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for libro in libros %}
-            <tr>
-              
-                <td scope="row">{{ libro.id}}</td>
-                <td scope="row">{{ libro.titulo }}</td>
-                <td scope="row">{{ libro.edicion }}</td>
-                <td scope="row">{{ libro.editorial }}</td>
-                <td scope="row">{{ libro.anio_de_publicacion }}</td>
-                <td scope="row">{{ libro.paginas }}</td>
-                <td>
-                  
-                  <form method='post' id='form-eliminar' action='{% url 'eliminar_libro' libro.pk %}'>
-                    {% csrf_token %}
-                    <input type='hidden' name='libro-id' value'{{ libro.pk}}'>
-                    <button type='button' class='btn btn-danger' id='btn-confirmar-eliminar-{{ libro.pk}}'>Eliminar</button>
-                    <div class='dropdown' id='dropdown-confirmacion-{{ libro.pk}}' style='display:none;'>
-                      <button class='btn btn-primary dropdown-toggle' type='button' id='dropdownMenuButtton' data-toggle='dropdown' aria-expanded='false'>
-                        Confirmar eliminacion
+
+<head>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  {% bootstrap_css %}
+  {% bootstrap_javascript %}
+
+  <style>
+    .titulo {
+      background-color: #286150;
+      border-radius: 20px;
+      padding: 10px;
+      font-family: arial;
+    }
+
+    h1 {
+      color: white;
+      font-size: xxx-large;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- encabezado -->
+  <div class="titulo" align="center">
+    <h1>Libros</h1>
+  </div>
+  <!-- contenido -->
+
+  <div align="center">
+    <div style="width:70%">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">
+              #
+            </th>
+            <th scope="col">
+              Titulo
+            </th>
+            <th scope="col">
+              Edicion
+            </th>
+            <th scope="col">
+              Editorial
+            </th>
+            <th scope="col">
+              Año de publicacion
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for ticket in tickets %}
+          <tr>
+
+            <td scope="row">{{ ticket.id}}</td>
+            <td scope="row">{{ ticket.resumen }}</td>
+            <td scope="row">{{ ticket.fechaCreacion }}</td>
+            <td scope="row">{{ ticket.statusTicket }}</td>
+            <td scope="row">{{ ticket.nivelPrioridad }}</td>
+            <td>
+              <!-- Button trigger modal -->
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#detallesTicketModalCenter{{ticket.id}}"
+                value="{{ticket.id}}">
+                Launch demo modal
+              </button>
+
+              <!-- Modal -->
+              <div class="modal fade" id="detallesTicketModalCenter{{ticket.id}}" tabindex="-1" role="dialog"
+                aria-labelledby="detallesTicketModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <form action="action='{% url 'updateTicket' %}'" method="post"></form>
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="detallesTicketModalLongTitle">Detalles Ticket {{ ticket.id }}</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
                       </button>
-                      <div class='dropdown-menu' aria-labelledby='dropdownMenuButton'>
-                        <button class='dropdown-item' type='submit' id="dropdownMenuButton-confirmar">  Si, eliminar  </button>
-                        <button class='dropdown-item' type='button' id="dropdownMenuButton-cancelar">  Cancelar  </button>
-                      </div>
                     </div>
+                    <div class="modal-body">
 
+                      {% csrf_token %}
+                      <div class="container-fluid">
+                        <div class="row">
+                          <div class="col-md-12">
+                              <div class="form-group">
+                                 
+                                <label for="exampleInputEmail1">
+                                  Resumen
+                                </label>
+                                <input type="email" class="form-control" id="resumen{{ticket.id}}" value="{{ticket.resumen}}" />
+                              </div>
+
+                              <div class="form-group">
+                                 
+                                <label for="exampleInputEmail1">
+                                  Resumen
+                                </label>
+                                <input type="email" class="form-control" id="resumen{{ticket.id}}" value="{{ticket.resumen}}" />
+                              </div>
+                              
+                              <div class="form-group">
+                                 
+                                <label for="exampleInputEmail1">
+                                  Resumen
+                                </label>
+                                <input type="email" class="form-control" id="resumen{{ticket.id}}" value="{{ticket.resumen}}" />
+                              </div>
+
+                              <div class="form-group">
+                                 
+                                <label for="exampleInputEmail1">
+                                  Resumen
+                                </label>
+                                <input type="email" class="form-control" id="resumen{{ticket.id}}" value="{{ticket.resumen}}" />
+                              </div>
+
+                              <div class="form-group">
+                                 
+                                <label for="exampleInputEmail1">
+                                  Resumen
+                                </label>
+                                <input type="email" class="form-control" id="resumen{{ticket.id}}" value="{{ticket.resumen}}" />
+                              </div>
+
+                              <div class="form-group">
+                                 
+                                <label for="exampleInputEmail1">
+                                  Resumen
+                                </label>
+                                <input type="email" class="form-control" id="resumen{{ticket.id}}" value="{{ticket.resumen}}" />
+                              </div>
+                              
+                             
+                            
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                  </div>
                   </form>
-                </td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
+                </div>
+              </div>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
       <!-- formulario -->
-      
-      </div>
+
     </div>
-    <script>
-      $(document).ready(function(){
-        $('[id^="btn-confirmar-eliminar"]').click(function(){
-          var divId = $(this).attr('id').split('-')[3];
-          $('#dropdown-confirmacion-'+divId).show()
-        })
+  </div>
+  <script>
+    $(document).ready(function () {
 
-        $('#btn-cancelar-eliminar').click(function(){
-          $('#dropdown-confirmacion').hide()
-        })
-        
-      });
 
-    </script>
+    });
 
-  </body>
+  </script>
+
+</body>
+
 </html>
 {% endblock %}
