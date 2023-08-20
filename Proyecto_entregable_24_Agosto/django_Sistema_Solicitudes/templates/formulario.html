@@ -3,56 +3,81 @@
 {% block content %}
 <!DOCTYPE html>
   <head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     {% bootstrap_css %}
     {% bootstrap_javascript %}
-    <style>
-      .titulo{
-        background-color: #286150;
-        border-radius: 20px;
-        padding: 10px;
-        font-family: arial;
-      }
-      h1{
-        color:white;
-        font-size: xxx-large;
-      }
-    </style>
-  </head>
-  <body>
-    <!-- encabezado -->
-    <div class="titulo" align="center">
-      <h1>Reportar un problema</h1>
-    </div>
-    <!-- contenido -->
-    
-    <div align="center">
-      <div style="width:70%">
-        
-      <!-- formulario -->
-      <br>
-      <br>
-      <form method="post">
-        {% csrf_token %}
-        <div class="form-group">
-          <label for="{{ form.resumen.id_for_label }}">Resumen</label>
-          {{ form.resumen|add_class:"form-control" }}
-        </div>
-        <div class="form-group">
-          <label for="{{ form.direccion.id_for_label }}">direccion</label>
-          {{ form.direccion|add_class:"form-control" }}
-        </div>
-        <div class="form-group">
-          <label for="{{ form.archivosAdjuntos.id_for_label }}">archivosAdjuntos</label>
-          {{ form.archivosAdjuntos|add_class:"form-control" }}
-        </div>
-        
-        <button type="submit">Guardar</button>
-       </form>
-      </div>
-    </div>
     
 
-    
-  </body>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+ 
+  
+</head>
+
+<body>
+
+
+
+
+  <section class="pt-5 pb-5">
+    <grammarly-extension data-grammarly-shadow-root="true"
+      style="position: absolute; top: 0px; left: 0px; pointer-events: none;" class="cGcvT"></grammarly-extension>
+    <div class="container">
+      <div class="row text-center justify-content-center">
+        <div class="col-12 col-md-8 col-lg-7">
+          <h1>Reportar un problema</h1>
+          <p class="text-h3">Proporciona cualquier enlace externo a recursos que puedan proporcionar contexto adicional. (Por ejemplo: Foros, Imgur, Reddit, Pastebin, Youtube, etc.)
+          </p>
+        </div>
+      </div>
+      <div class="row pt-4">
+        <div class="col-12 col-md-6">
+          <iframe class="map" id="googleMap"
+            src="https://maps.google.com/maps?q=31214&t=&z=13&ie=UTF8&iwloc=&output=embed"
+            width="100%" height="600" frameborder="0" style="border:0"
+            allowfullscreen=""></iframe>
+        </div>
+        <div class="col-12 col-md-6 pt-5 pt-md-0">
+          <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+              <label for="{{ ticketform.resumen.id_for_label }}">Resumen</label>
+              {{ ticketform.resumen|add_class:"form-control" }}
+            </div>
+            <div class="form-group">
+              <label for="{{ ticketform.direccion.id_for_label }}">Direccion</label>
+              {{ ticketform.direccion|add_class:"form-control" }}
+            </div>
+            <div class="form-group">
+              <label for="{{ archivosform.archivos.id_for_label }}">archivosAdjuntos</label>
+              {{ archivosform.archivos|add_class:"form-control" }}
+            </div>
+
+            
+            <button type="submit">Guardar</button>
+           </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+    <script>
+      $(document).ready(function(){
+        
+        console.log("Esta cambiando")
+        $('#direccionField').change(function(){
+          var str = $("#direccionField").val();
+          console.log("Esta cambiando",str)
+          $('#googleMap').attr('src', "https://maps.google.com/maps?q="+str+"&t=&z=13&ie=UTF8&iwloc=&output=embed");
+          
+        })
+        
+      });
+
+    </script>
+
+
+</body>
+
 </html>
 {% endblock %}

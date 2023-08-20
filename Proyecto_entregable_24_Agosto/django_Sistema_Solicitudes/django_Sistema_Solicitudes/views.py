@@ -14,15 +14,17 @@ def custom_login(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
+        print(request.POST)
         user = authenticate(request,username=username,password=password)
-        if user is not None:
+        if user is not None and user.is_active:
             login(request,user)
+            messages.info(request,'Login correcto')
             print('----> SI, entro')
             return redirect('/dashboard/servidor')
         else:
             print('----> No, entro')
             messages.error(request, 'Credenciales invalidas')
-            return redirect('/dashboard/dashboardPublico')
+            return redirect('/login')
 
     return render(request,template_name)
 
