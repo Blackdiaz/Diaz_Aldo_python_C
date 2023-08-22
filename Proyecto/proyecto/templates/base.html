@@ -1,8 +1,10 @@
 {% load bootstrap4 %}
 {% load widget_tweaks %}
 <!DOCTYPE html>
-  <head>
     {% bootstrap_css %}
+    {% bootstrap_javascript %}
+  <head>
+    
     
     
   </head>
@@ -22,7 +24,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'formulario' %}">Formulario</a>
                 </li>
-                {% if user.is_auntheticated %}
+                {% if user.is_authenticated %}
                 <li class="nav-item">
                   <a  class="nav-link" href="{% url 'logout' %}">Log out</a>
                 </li>
@@ -42,6 +44,7 @@
       {% block content %}
       {% endblock %}
     </main>
-    {% bootstrap_javascript %}
+    
   </body>
+  {% bootstrap_javascript %}
 </html>

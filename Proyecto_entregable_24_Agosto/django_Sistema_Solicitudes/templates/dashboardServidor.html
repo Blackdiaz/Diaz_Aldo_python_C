@@ -1,3 +1,7 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% load widget_tweaks %}
+{% block content %}
 <!DOCTYPE html>
 <html>
 
@@ -28,11 +32,11 @@
       <div class="container">
         <div class="row mb-md-4">
           <div class="col-12 col-lg-8 text-center text-lg-start">
-            <h3 class="text-primary small">Lorem ipsum</h3>
-            <h2 class=" ">Lorem ipsum dolor magna</h2>
+            
+            <h2 class=" ">Bienvenido</h2>
+            <h3 class="text-primary medium">{{user.username}}</h3>
             <p class="lead">
-              Lorem ipsum massa in auctor molestie, magna lorem semper mauris, a
-              venenatis turpis purus vel metus.
+              Para ingresar a una de las opciones da click en el icono.
             </p>
           </div>
         </div>
@@ -44,15 +48,15 @@
                 <div class="col-12 col-sm-3 col-md-3 text-center px-0">
                   <div class="icon-wrap text-primary my-3">
                     <i
-                      class="icon p-4 border-primary bg-light text-primary md-font-size rounded-circle fa fa-tint fa-lg"></i>
+                      class="icon p-4 border-primary bg-light text-primary md-font-size rounded-circle fa fa-archive fa-lg"></i>
                   </div>
                 </div>
                 <div class="col-12 col-md-9 mt-3 mt-lg-0">
                   <h4 class="">
-                    Lorem ipsum dolor
+                    Ver todos los tickets
                   </h4>
                   <p class=" mb-0">
-                    Praesent mollis, massa in auctor molestie
+                    Aqui se visualizara cada uno de los tickets que el publico haya subido a la plataforma
                   </p>
                 </div>
               </div>
@@ -69,10 +73,10 @@
                 </div>
                 <div class="col-12 col-md-9 mt-3 mt-lg-0">
                   <h4 class="">
-                    Etiam sed iaculis
+                    Mi espacio de trabajo
                   </h4>
                   <p class="  mb-0">
-                    Praesent mollis, massa in auctor molestie
+                    Aqui veras todos los tickets que tengas asignados
                   </p>
                 </div>
               </div>
@@ -89,10 +93,10 @@
                 </div>
                 <div class="col-12 col-md-9 mt-3 mt-lg-0">
                   <h4 class="">
-                    Auctor molestie
+                    Estadisticas
                   </h4>
                   <p class="  sm-font-size text-dark-gray mb-0">
-                    Praesent mollis, massa in auctor molestie
+                    Aqui veras un resumen de todos los tickets que tengas asignados 
                   </p>
                 </div>
               </div>
@@ -118,3 +122,4 @@
   </body>
 
 </html>
+{% endblock %}

@@ -7,7 +7,7 @@ from django.contrib.auth import logout
 
 def custom_logout(request):
     logout(request)
-    return redirect('/dashboard/dashboardPublico')
+    return redirect('/dashboard/publico')
 
 def custom_login(request):
     template_name = 'login.html'
@@ -18,7 +18,7 @@ def custom_login(request):
         user = authenticate(request,username=username,password=password)
         if user is not None and user.is_active:
             login(request,user)
-            messages.info(request,'Login correcto')
+            #messages.info(request,'Login correcto')
             print('----> SI, entro')
             return redirect('/dashboard/servidor')
         else:

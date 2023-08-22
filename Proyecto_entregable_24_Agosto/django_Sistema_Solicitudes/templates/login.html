@@ -1,3 +1,7 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% load widget_tweaks %}
+{% block content %}
 <!DOCTYPE html>
 <html>
 
@@ -46,6 +50,8 @@
             </div>
 
             <div class="send-button mt-5">
+              {{user.username}}
+              {{request.user.is_authenticated }}
               {% if messages %}
               <ul class="messages">
                 {% for message in messages%}
@@ -73,3 +79,4 @@
 </body>
 
 </html>
+{% endblock %}
