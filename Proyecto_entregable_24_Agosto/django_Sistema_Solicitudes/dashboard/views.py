@@ -6,6 +6,7 @@ from .forms import ArchivosForms,TicketsForms
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.db.models import Sum, Max, Avg
+from django.contrib import messages
 
 
 def index(request):
@@ -21,25 +22,34 @@ class Formulario(View):
             #resumen = request.POST.get('resumen')
             ##direccion = request.POST.get('direccion')
             #archivosAdjuntos = request.POST.get('archivosAdjuntos')
-            print(request.POST,request.FILES)
-            updated_request = request.POST.copy()
+            #print(request.POST,request.FILES)
+            updated_requestPOST = request.POST.copy()
+            updated_requestFILES = request.FILES.copy()
+
             ticketsForms = TicketsForms(request.POST)
             if ticketsForms.is_valid():
                 data = ticketsForms.save()
-                updated_request.update({'idTicket': [data.id]})
-            archivosForms = ArchivosForms(updated_request)
-            if archivosForms.is_valid():
-                archivosForms.save()
+                updated_requestPOST.update({'idTicket': [data.id]})
             else:
-                print("No es valido")
+                print(ticketsForms.errors)
+            if len(request.FILES) != 0:
+                updated_requestPOST.update({'descricpcionArchivo': [request.FILES[u'archivos'].name]})
+                print("updated",updated_requestPOST)
+                archivosForms = ArchivosForms(updated_requestPOST,updated_requestFILES)
+                if archivosForms.is_valid():
+                    archivosForms.save()
+                    
+                else:
+                    print(archivosForms.errors)
             #TicketsObject = get_object_or_404(Tickets, =account_number)
             #account.current_balance = account.current_balance + amount
             #account.save()
 
             
-        
-            
-        return render(request, self.teamplate_name)
+        ticketform = TicketsForms()
+        archivosform = ArchivosForms()
+        messages.error(request, 'Se registro correctamente')
+        return render(request, self.teamplate_name,{'ticketform': ticketform,'archivosform': archivosform })
     
     def get(self, request):
         ticketform = TicketsForms()

@@ -30,6 +30,14 @@
           </p>
         </div>
       </div>
+      {% if messages %}
+              <ul class="messages">
+                {% for message in messages%}
+                <li {% if message.tag%} class="{{message.tags}}" {% endif%}>{{message}}</li>
+                {% endfor %}
+              </ul>
+
+      {% endif %}
       <div class="row pt-4">
         <div class="col-12 col-md-6">
           <iframe class="map" id="googleMap"
@@ -38,18 +46,22 @@
             allowfullscreen=""></iframe>
         </div>
         <div class="col-12 col-md-6 pt-5 pt-md-0">
-          <form method="post">
+          <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="form-group">
               <label for="{{ ticketform.resumen.id_for_label }}">Resumen</label>
               {{ ticketform.resumen|add_class:"form-control" }}
             </div>
             <div class="form-group">
+              <label for="{{ ticketform.descripcion.id_for_label }}">Descripcion</label>
+              {{ ticketform.descripcion|add_class:"form-control" }}
+            </div>
+            <div class="form-group">
               <label for="{{ ticketform.direccion.id_for_label }}">Direccion</label>
               {{ ticketform.direccion|add_class:"form-control" }}
             </div>
             <div class="form-group">
-              <label for="{{ archivosform.archivos.id_for_label }}">archivosAdjuntos</label>
+              <label for="{{ archivosform.archivos.id_for_label }}">Adjuntar archivos</label>
               {{ archivosform.archivos|add_class:"form-control" }}
             </div>
 
