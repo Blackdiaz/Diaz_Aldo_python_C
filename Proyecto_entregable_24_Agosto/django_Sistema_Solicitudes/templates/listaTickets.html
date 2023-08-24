@@ -11,7 +11,7 @@
 
   <style>
     .titulo {
-      background-color: #286150;
+      background-color: #1C5DA6;
       border-radius: 20px;
       padding: 10px;
       font-family: arial;
@@ -27,7 +27,7 @@
 <body>
   <!-- encabezado -->
   <div class="titulo" align="center">
-    <h1>Libros</h1>
+    <h1>Tickets de la plataforma</h1>
   </div>
   <!-- contenido -->
 
@@ -40,16 +40,16 @@
               #
             </th>
             <th scope="col">
-              Titulo
+              Resumen
             </th>
             <th scope="col">
-              Edicion
+              Fecha de creacion
             </th>
             <th scope="col">
-              Editorial
+              Status ticket
             </th>
             <th scope="col">
-              Año de publicacion
+              Nivel de prioridad
             </th>
           </tr>
         </thead>
@@ -66,7 +66,7 @@
               <!-- Button trigger modal -->
               <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#detallesTicketModalCenter{{ticket.id}}"
                 value="{{ticket.id}}">
-                Launch demo modal
+                Ver detalles
               </button>
 
               <!-- Modal -->
@@ -101,6 +101,47 @@
                                   Resumen
                                 </label>
                                 <input type="text" class="form-control" id="resumen{{ticket.resumen}}" name="resumen" value="{{ticket.resumen}}" />
+                                
+                              </div>
+                              <div class="form-group">
+                                <label for="exampleInputEmail1">
+                                  Descripcion
+                                </label>
+                                <br>
+                                <textarea id="resumen{{ticket.descripcion}}" name="resumen"  cols="30" rows="10">{{ticket.descripcion}}</textarea>
+                              </div>
+                              
+                              <div class="form-group">
+                                <label >Status</label>
+                                <br>
+                                <select class="form-select" aria-label="Default select example">
+                                  <option selected>Open this select menu</option>
+                                  <option value="1">One</option>
+                                  <option value="2">Two</option>
+                                  <option value="3">Three</option>
+                                </select>
+                              </div>
+
+                              <div class="form-group">
+                                <label>Prioridad</label>
+                                <br>
+                                <select class="form-select" aria-label="Default select example">
+                                  <option selected>Open this select menu</option>
+                                  <option value="1">One</option>
+                                  <option value="2">Two</option>
+                                  <option value="3">Three</option>
+                                </select>
+                              </div>
+
+                              <div class="form-group">
+                                <label>Encargado</label>
+                                <br>
+                                <select class="form-select" aria-label="Default select example">
+                                  <option selected>Open this select menu</option>
+                                  <option value="1">One</option>
+                                  <option value="2">Two</option>
+                                  <option value="3">Three</option>
+                                </select>
                               </div>
 
                             
@@ -112,8 +153,8 @@
 
                     </div>
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                      <button type="submit" class="btn btn-primary">Save changes</button>
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                      <button type="submit" class="btn btn-primary">Actualizar ticket</button>
                     </div>
                   </div>
                   </form>

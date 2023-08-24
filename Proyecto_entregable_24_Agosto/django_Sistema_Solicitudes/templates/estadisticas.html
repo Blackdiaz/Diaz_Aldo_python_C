@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% load widget_tweaks %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estadisticas libros</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    
+</head>
+<body>
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-8 offset-2">
+                <h1>Estadisticas de tickets</h1>
+                <div class="text-center mb-3">
+                    <p>Total del tickets recibidos: {{ total_tickets}}</p>
+                    <p>Fecha mas reciente de ticket: {{ fecha_reciente}}</p>
+                    
+                    <div style="height: 400px;">
+                        <canvas id="grafico"></canvas>
+                    </div>
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        
+    
+        var datos = 
+        {
+            labels:{{labels_promedio_ticket_al_dia|safe}},
+            datasets:[{
+                label:"Conteo",
+                backgroundColor:["DarkSlateBlue","Teal"],
+                data:{{data_promedio_ticket_al_dia|safe}}
+            }]
+        };
+
+        var opciones =
+        {
+            responsive:true,
+            maitainAspectRatio:false
+        };
+
+        var ctx = document.getElementById("grafico").getContext("2d");
+        var grafico = new Chart(ctx, { 
+            type: 'bar',
+            data: datos,
+            options: opciones
+        })
+        
+
+    </script>
+</body>
+</html>
+{% endblock %}

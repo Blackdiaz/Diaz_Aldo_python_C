@@ -36,7 +36,7 @@
             <h2 class=" ">Bienvenido</h2>
             <h3 class="text-primary medium">{{user.username}}</h3>
             <p class="lead">
-              Para ingresar a una de las opciones da click en el icono.
+              Para ingresar a una de las opciones da click en el boton.
             </p>
           </div>
         </div>
@@ -56,8 +56,11 @@
                     Ver todos los tickets
                   </h4>
                   <p class=" mb-0">
-                    Aqui se visualizara cada uno de los tickets que el publico haya subido a la plataforma
+                    En esta seccion se visualizara cada uno de los tickets que el publico haya subido a la plataforma
                   </p>
+                  
+                <a href="{% url 'listaTickets' %}" class="btn btn-primary" role="button">Ir a esta seccion</a>
+
                 </div>
               </div>
             </div>
@@ -76,8 +79,9 @@
                     Mi espacio de trabajo
                   </h4>
                   <p class="  mb-0">
-                    Aqui veras todos los tickets que tengas asignados
+                    En esta seccion veras todos los tickets pendientes que tengas asignados a tu usuario
                   </p>
+                  <a href="{% url 'listaTickets' %}" class="btn btn-primary" role="button">Ir a esta seccion</a>
                 </div>
               </div>
             </div>
@@ -96,8 +100,9 @@
                     Estadisticas
                   </h4>
                   <p class="  sm-font-size text-dark-gray mb-0">
-                    Aqui veras un resumen de todos los tickets que tengas asignados 
+                    En esta seccion veras un resumen de todos los tickets que tengas asignados a tu usuario
                   </p>
+                  <a href="{% url 'estadisticas_tickets' %}" class="btn btn-primary" role="button">Ir a esta seccion</a>
                 </div>
               </div>
             </div>
