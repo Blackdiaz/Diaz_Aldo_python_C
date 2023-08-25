@@ -11,6 +11,10 @@ urlpatterns = [
     path('dashboard/', include("dashboard.urls")),
     path('login/',views.custom_login ,name='login'),
     path('logout/', views.custom_logout ,name='logout'),
+    path('reset-password/', auth_views.PasswordResetView.as_view() ,name='password_reset'),
+    path('reset-password/done', auth_views.PasswordResetDoneView.as_view() ,name='password_reset_done'),
+    path('reset/<uidb64>/<token>', auth_views.PasswordResetConfirmView.as_view() ,name='password_reset_confirm'),
+    path('reset/done', auth_views.PasswordResetCompleteView.as_view() ,name='password_reset_complete'),
     
 ]
 
