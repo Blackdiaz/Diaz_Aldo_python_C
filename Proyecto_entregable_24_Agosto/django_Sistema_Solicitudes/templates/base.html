@@ -29,9 +29,11 @@
           <li class="nav-item">
             <a class="nav-link" href=""></a>
           </li>
+          {% if user.is_staff %}
           <li class="nav-item">
-            <a class="nav-link" href="">Contact</a>
+            <a class="nav-link" href="{% url 'admin:index' %}">Panel de administracion</a>
           </li>
+          {% endif %}
           {% if user.is_authenticated  %}
           <li class="nav-item">
             <a  class="nav-link" href="{% url 'logout' %}">Log out</a>

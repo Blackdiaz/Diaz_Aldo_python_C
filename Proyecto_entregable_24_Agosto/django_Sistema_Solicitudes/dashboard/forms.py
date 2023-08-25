@@ -1,5 +1,5 @@
 from django import forms
-from .models import Tickets,archivos
+from .models import Tickets,Archivos
 
 class TicketsForms (forms.ModelForm):
     descripcion = forms.CharField(widget=forms.Textarea)
@@ -35,7 +35,7 @@ class ArchivosForms (forms.ModelForm):
         help_text='max. 42 megabytes'
     )
     class Meta:
-        model = archivos
+        model = Archivos
         fields = ['idTicket','descricpcionArchivo','archivos']
         
     

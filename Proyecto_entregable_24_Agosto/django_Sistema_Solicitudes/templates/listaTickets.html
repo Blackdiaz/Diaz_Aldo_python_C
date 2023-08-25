@@ -21,6 +21,36 @@
       color: white;
       font-size: xxx-large;
     }
+
+    .Pendiente{
+      color: white;
+      background: rgb(98, 98, 121);
+    }
+    .Revision{
+      color: white;
+      background: rgb(64, 64, 193);
+    }
+    .Completado{
+      color: white;
+      background: rgb(102, 215, 148);
+    }
+    .Cancelado{
+      color: white;
+      background: rgb(240, 84, 60);
+      
+    }
+    .Alta{
+      color: white;
+      background: rgb(240, 84, 60);
+    }
+    .Normal{
+      color: white;
+      background: rgb(240, 153, 60);
+    }
+    .Baja{
+      color: white;
+      background: rgb(102, 215, 148);
+    }
   </style>
 </head>
 
@@ -60,7 +90,7 @@
             <td scope="row">{{ ticket.id}}</td>
             <td scope="row">{{ ticket.resumen }}</td>
             <td scope="row">{{ ticket.fechaCreacion }}</td>
-            <td scope="row">{{ ticket.statusTicket }}</td>
+            <td id="status{{ticket.id}}" scope="row">{{ ticket.statusTicket }}</td>
             <td scope="row">{{ ticket.nivelPrioridad }}</td>
             <td>
               <!-- Button trigger modal -->
@@ -72,8 +102,8 @@
               <!-- Modal -->
               <div class="modal fade" id="detallesTicketModalCenter{{ticket.id}}" tabindex="-1" role="dialog"
                 aria-labelledby="detallesTicketModalCenterTitle" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                  <form action="{% url 'updateTicket' %}" method="post">
+                <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 600px">
+                  <form action="{% url 'updateTicket' ticket.id %}" method="post">
                   <div class="modal-content">
                     <div class="modal-header">
                       <h5 class="modal-title" id="detallesTicketModalLongTitle">Detalles Ticket {{ ticket.id }}</h5>
@@ -86,13 +116,13 @@
                       {% csrf_token %}
                       <div class="container-fluid">
                         <div class="row">
-                          <div class="col-md-12">
+                          <div class="col-md-6">
                             <div class="form-group">
                                  
                               <label for="exampleInputEmail1">
                                 ID
                               </label>
-                              <input type="number" class="form-control" id="resumen{{ticket.id}}" name="id" value="{{ticket.id}}" />
+                              <input type="number" class="form-control" id="resumen{{ticket.id}}" name="id" value="{{ticket.id}}" disabled readonly/>
                             </div>
 
                               <div class="form-group">
@@ -100,7 +130,7 @@
                                 <label for="exampleInputEmail1">
                                   Resumen
                                 </label>
-                                <input type="text" class="form-control" id="resumen{{ticket.resumen}}" name="resumen" value="{{ticket.resumen}}" />
+                                <input type="text" class="form-control" id="resumen{{ticket.resumen}}" name="resumen" value="{{ticket.resumen}}" disabled readonly/>
                                 
                               </div>
                               <div class="form-group">
@@ -108,49 +138,66 @@
                                   Descripcion
                                 </label>
                                 <br>
-                                <textarea id="resumen{{ticket.descripcion}}" name="resumen"  cols="30" rows="10">{{ticket.descripcion}}</textarea>
+                                <textarea id="resumen{{ticket.descripcion}}" name="resumen"  cols="29" rows="10" disabled readonly>{{ticket.descripcion}}</textarea>
                               </div>
                               
-                              <div class="form-group">
-                                <label >Status</label>
-                                <br>
-                                <select class="form-select" aria-label="Default select example">
-                                  <option selected>Open this select menu</option>
-                                  <option value="1">One</option>
-                                  <option value="2">Two</option>
-                                  <option value="3">Three</option>
-                                </select>
-                              </div>
-
-                              <div class="form-group">
-                                <label>Prioridad</label>
-                                <br>
-                                <select class="form-select" aria-label="Default select example">
-                                  <option selected>Open this select menu</option>
-                                  <option value="1">One</option>
-                                  <option value="2">Two</option>
-                                  <option value="3">Three</option>
-                                </select>
-                              </div>
-
-                              <div class="form-group">
-                                <label>Encargado</label>
-                                <br>
-                                <select class="form-select" aria-label="Default select example">
-                                  <option selected>Open this select menu</option>
-                                  <option value="1">One</option>
-                                  <option value="2">Two</option>
-                                  <option value="3">Three</option>
-                                </select>
-                              </div>
-
+                             
                             
                              
                             
                           </div>
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label >Status</label>
+                              <br>
+                              <select class="form-select" aria-label="Default select example" name="statusTicket">
+                                <option selected>Click para seleccionar status</option>
+                                <option value="En revision" {% if ticket.statusTicket == "En revision" %}selected{% endif %}>En revision</option>
+                                <option value="Completado" {% if ticket.statusTicket == "Completado" %}selected{% endif %}>Completado</option>
+                                <option value="Cancelado" {% if ticket.statusTicket == "Cancelado" %}selected{% endif %}>Cancelado</option>
+                              </select>
+                            </div>
+
+                            <div class="form-group">
+                              <label>Prioridad</label>
+                              <br>
+                              <select class="form-select" aria-label="Default select example" name="nivelPrioridad">
+                                <option selected>Click para seleccionar prioridad</option>
+                                <option value="Alta" {% if ticket.nivelPrioridad == "Alta" %}selected{% endif %}>Alta</option>
+                                <option value="Normal" {% if ticket.nivelPrioridad == "Normal" %}selected{% endif %}>Normal</option>
+                                <option value="Baja" {% if ticket.nivelPrioridad == "Baja" %}selected{% endif %}>Baja</option>
+                              </select>
+                            </div>
+
+                            <div class="form-group">
+                              <label>Encargado</label>
+                              <br>
+                              <select class="form-select" aria-label="Default select example" name="usuarioEncargado">
+                                <option selected>Click para seleccionar encargado</option>
+                                <option value="Juan" {% if ticket.usuarioEncargado == "Juan" %}selected{% endif %}>Juan</option>
+                                <option value="Raul" {% if ticket.usuarioEncargado == "Juan" %}selected{% endif %}>Raul</option>
+                                <option value="Luis" {% if ticket.usuarioEncargado == "Juan" %}selected{% endif %}>Luis</option>
+                              </select>
+                            </div>
+                            <label>Comentarios</label>
+                            <br>
+                            <textarea id="resumen{{ticket.comentariosEncargado}}" name="comentariosEncargado"  cols="29" rows="8">{{ticket.comentariosEncargado}}</textarea>
+
+                          </div>
                         </div>
+
                       </div>
 
+                    </div>
+                    <div>
+                      {% for archivo in archivos %}
+                      
+                      
+                        {% if archivo.idTicket == ticket.id|stringformat:"d" %}
+                          <p>  <a href="{% url 'descargar_archivo' archivo.id %}">Descargar archivo adjunto</a></p>
+                        {% endif %}
+                        
+                      {% endfor %}
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -171,7 +218,21 @@
   </div>
   <script>
     $(document).ready(function () {
+      
+      var valuesStatus = $('[id^="status"]').get()
+      valuesStatus.forEach(element => {
+        if(element.textContent == ""){
+          element.textContent = "Pendiente"
+          element.className = "Pendiente"
+        }else if(element.textContent == "En revision"){
+          element.className = "Revision"
+        }else if(element.textContent == "Completado"){
+          element.className = "Completado"
+        }else if(element.textContent == "Cancelado"){
+          element.className = "Cancelado"
+        }
 
+      });
 
     });
 

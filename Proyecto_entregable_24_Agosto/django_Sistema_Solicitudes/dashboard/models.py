@@ -12,14 +12,14 @@ class Tickets(models.Model):
     fechaAtencion = models.DateTimeField("Fecha de atencion" ,null=True,default=None)
     fechaTerminacionPrevista = models.DateTimeField("Fecha de finalizacion programada" ,null=True,default=None)
     fechaTerminacionFinal = models.DateTimeField("Fecha de finalizacion real" ,null=True,default=None)
-    statusTicket = models.CharField("Status ticket",max_length=2,default="")
-    nivelPrioridad = models.CharField("Nivel de prioridad",max_length=2,default="")
+    statusTicket = models.CharField("Status ticket",max_length=15,default="")
+    nivelPrioridad = models.CharField("Nivel de prioridad",max_length=15,default="")
     comentariosEncargado = models.CharField("Comentarios",max_length=500,default="")
 
     def _str_(self):
         return self.pk
 
-class archivos(models.Model):
+class Archivos(models.Model):
     idTicket =  models.CharField("Folio Ticket",max_length=100,default="")
     descricpcionArchivo = models.CharField("Descricpcion Archivo",max_length=500,default="")
     archivos = models.FileField("Archivo",upload_to='documents/%Y/%m/%d')

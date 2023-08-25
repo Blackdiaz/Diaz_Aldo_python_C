@@ -1,7 +1,7 @@
 from django.http import HttpResponse, JsonResponse
 from django.views import View
 from django.shortcuts import render, redirect , get_object_or_404
-from .models import archivos,Tickets
+from .models import Archivos,Tickets
 from .forms import ArchivosForms,TicketsForms
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
@@ -30,11 +30,11 @@ class Formulario(View):
             ticketsForms = TicketsForms(request.POST)
             if ticketsForms.is_valid():
                 data = ticketsForms.save()
-                updated_requestPOST.update({'idTicket': [data.id]})
+                updated_requestPOST.update({'idTicket': data.id})
             else:
                 print(ticketsForms.errors)
             if len(request.FILES) != 0:
-                updated_requestPOST.update({'descricpcionArchivo': [request.FILES[u'archivos'].name]})
+                updated_requestPOST.update({'descricpcionArchivo': request.FILES[u'archivos'].name})
                 print("updated",updated_requestPOST)
                 archivosForms = ArchivosForms(updated_requestPOST,updated_requestFILES)
                 if archivosForms.is_valid():
@@ -78,22 +78,34 @@ class ListaTickets(View):
     teamplate_name = 'listaTickets.html'
 
     @method_decorator(login_required)
-    def get(self, request):
-        tickets = Tickets.objects.all()
+    def get(self, request,tipoTicket=None):
+        archivos = Archivos.objects.all()
+        # Filtrar los tickets por estado 
+        if tipoTicket is not None:
+            if tipoTicket!="Cerrado":
+                tickets = Tickets.objects.filter(statusTicket=tipoTicket)
+            else:
+                tickets = Tickets.objects.filter(statusTicket__in=["Completado","cancelado"])
+        else:
+            tickets = Tickets.objects.all()
+
         
-        return render(request, self.teamplate_name, {'tickets': tickets})
+        return render(request, self.teamplate_name, {'tickets': tickets, 'archivos':archivos})
     
 class UpdateTicket(View):
     teamplate_name = 'listaTickets.html'
 
     @method_decorator(login_required)
-    def post(self,request):
+    def post(self,request,ticketId):
         
         if request.method == "POST":
             
-            ticket = get_object_or_404(Tickets,pk=request.POST.get('id'))
+            ticket = get_object_or_404(Tickets,pk=ticketId)
             print(ticket.resumen)
-            ticket.resumen = request.POST.get('resumen')
+            ticket.nivelPrioridad = request.POST.get('nivelPrioridad')
+            ticket.statusTicket = request.POST.get('statusTicket')
+            ticket.usuarioEncargado = request.POST.get('usuarioEncargado')
+            ticket.comentariosEncargado = request.POST.get('comentariosEncargado')
             ticket.save()
             print(ticket.resumen)
             tickets = Tickets.objects.all()
@@ -101,6 +113,11 @@ class UpdateTicket(View):
                 
 
         return render(request,self.teamplate_name, {'tickets': tickets})
+    
+    def get(self, request):
+        ticketform = TicketsForms()
+        archivosform = ArchivosForms()
+        return render(request, self.teamplate_name, {'ticketform': ticketform,'archivosform': archivosform })
     
 
 
@@ -136,3 +153,9 @@ def estadisticas_tickets(request):
         'conteoTickets_dia':sumaDiasTotales
 
     })   
+
+def descargar_archivo(request, archivo_id):
+    archivo = get_object_or_404(Archivos, id=archivo_id)
+    response = HttpResponse(archivo.archivos, content_type='application/octet-stream')
+    response['Content-Disposition'] = f'attachment; filename="{archivo.descricpcionArchivo}"'
+    return response

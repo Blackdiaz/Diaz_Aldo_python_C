@@ -44,14 +44,13 @@
             </div>
             <div class="input-group input-lg mt-4">
 
-              <span class="input-group-text" id="basic-addon2"><i class="fa fa-envelope"></i></span><input
-                name="password" type="text" class="form-control" id="password" placeholder="Contraseña..."
+              <span class="input-group-text" id="basic-addon2"><i class="fa fa-key fa-fw"></i></span><input
+                name="password" type="password" class="form-control" id="password" placeholder="Contraseña..."
                 aria-describedby="basic-addon2">
             </div>
 
             <div class="send-button mt-5">
-              {{user.username}}
-              {{request.user.is_authenticated }}
+              
               {% if messages %}
               <ul class="messages">
                 {% for message in messages%}

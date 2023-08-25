@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import archivos,Tickets
+from .models import Archivos,Tickets
 
-admin.site.register(archivos)
+admin.site.register(Archivos)
 admin.site.register(Tickets)
